@@ -135,6 +135,23 @@ class BSTree<T>{
 
         return current?.value ?? null
     }
+
+    // 搜索
+    search(value: T) {
+        let current = this.root
+
+        while (current) {
+            if (value === current?.value) return true
+
+            if (value > current.value) {
+                current = current.right
+            } else {
+                current = current.left
+            }
+        }
+
+        return false
+    }
 }
 
 const bst = new BSTree<number>()
@@ -170,5 +187,9 @@ bst.levelOrderTraverse()
 // 最大最小值
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:172 ~ bst.getMaxValue():", bst.getMaxValue())
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:173 ~ bst.getMinValue():", bst.getMinValue())
+
+// 搜索
+console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(20):", bst.search(20))
+console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(21):", bst.search(21))
 
 export { }

@@ -5,4 +5,4 @@ export interface IQueue<T> extends IList<T> {
   enqueue(element: T): void
   // 出队方法
   dequeue(): T | undefined
-}
+} 
