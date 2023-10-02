@@ -181,12 +181,21 @@ class BSTree<T>{
 
     // 删除
     remove(value: T) {
-        // 父结点为 Null 一定为根节点
+        // 1.搜索： 当前是否有这个 value
         const current = this.searchNode(value)
-        const parent = current?.parent
+        if (!current) return false
 
-        console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:173 ~ BSTree<T> ~ remove ~ current?.value:", current?.value)
-        console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:174 ~ BSTree<T> ~ remove ~ parent?.value:", parent?.value)
+        // 2.获取到三个东西：当前节点 / 父节点 / 属于父节点的左子节点，还是右子节点
+        // 2.如果删除的是叶子节点
+        if (current.left === null && current.right === null) {
+            if (current === this.root?.right) { // 根节点
+                this.root = null
+            } else if (current.isLeft) { // 父节点的左子节点
+                current.parent!.left = null
+            } else { // 父节点的右子节点
+                current.parent!.right = null
+            }
+        }
 
         return true
     }
@@ -231,7 +240,14 @@ console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(20):", bs
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(21):", bst.search(21))
 
 // 删除
-bst.remove(15)
 bst.remove(3)
+bst.remove(8)
+bst.remove(12)
+bst.print()
+bst.remove(6)
+bst.remove(10)
+bst.remove(25)
+bst.print()
+
 
 export { }
