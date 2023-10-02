@@ -4,6 +4,19 @@ import { btPrint } from "hy-algokit";
 class TreeNode<T> extends Node<T> {
     left: TreeNode<T> | null = null;
     right: TreeNode<T> | null = null;
+
+    // 当前节点的父节点
+    parent: TreeNode<T> | null = null;
+
+    // 当前节点是父节点的左子节点
+    get isLeft(): boolean {
+        return !!(this.parent && this.parent.left === this)
+    }
+
+    // 当前节点是父节点的右子节点
+    get isRight(): boolean {
+        return !!(this.parent && this.parent.right === this)
+    }
 }
 
 
@@ -138,19 +151,44 @@ class BSTree<T>{
 
     // 搜索
     search(value: T) {
+        return !!this.searchNode(value)
+    }
+
+    private searchNode(value: T): TreeNode<T> | null {
+        // 父结点为 Null 一定为根节点
         let current = this.root
-
+        let parent: TreeNode<T> | null = null
         while (current) {
-            if (value === current?.value) return true
+            // 1.如果找到 current 直接返回
+            if (value === current.value) {
+                return current
+            }
 
+            // 2.继续向下查找
+            parent = current
             if (value > current.value) {
                 current = current.right
             } else {
                 current = current.left
             }
+
+            // 3.如果current存在 保存它的父节点
+            if (current) current.parent = parent
         }
 
-        return false
+        return null
+    }
+
+    // 删除
+    remove(value: T) {
+        // 父结点为 Null 一定为根节点
+        const current = this.searchNode(value)
+        const parent = current?.parent
+
+        console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:173 ~ BSTree<T> ~ remove ~ current?.value:", current?.value)
+        console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:174 ~ BSTree<T> ~ remove ~ parent?.value:", parent?.value)
+
+        return true
     }
 }
 
@@ -191,5 +229,9 @@ console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:173 ~ bst.getMinValue():",
 // 搜索
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(20):", bst.search(20))
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(21):", bst.search(21))
+
+// 删除
+bst.remove(15)
+bst.remove(3)
 
 export { }
