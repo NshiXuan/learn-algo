@@ -179,6 +179,32 @@ class BSTree<T>{
         return null
     }
 
+    // 获取后继节点
+    private getSuccessor(delNode: TreeNode<T>) {
+        // 获取右子树
+        let current = delNode.right
+        let successor: TreeNode<T> | null = null
+        while (current) {
+            successor = current
+            current = current.left
+            if (current) {
+                current.parent = successor
+            }
+        }
+
+        // 拿到了后继节点
+        if (successor !== delNode.right) {
+            // 顺序不能乱
+            successor!.parent!.left = successor!.right
+            successor!.right = delNode.right
+        }
+
+        // 一定要做的 将删除节点的 left 赋值给后继节点的 left
+        successor!.left = delNode.left
+
+        return successor!
+    }
+
     // 删除
     remove(value: T) {
         // 1.搜索： 当前是否有这个 value
@@ -194,6 +220,55 @@ class BSTree<T>{
                 current.parent!.left = null
             } else { // 父节点的右子节点
                 current.parent!.right = null
+            }
+        }
+
+
+        // 3.删除当前节点只有一个子节点
+        // 删除只有一个左子节点
+        else if (current.right === null) {
+            /* 如果是根节点
+                    11
+            ┌───────┴───────┐ 
+            7              
+        ┌───┴───┐       
+        5       9      
+
+            删除后如下
+
+                7              
+            ┌───┴───┐       
+            5       9   
+
+            */
+            if (current === this.root) {
+                this.root = current.left
+            } else if (current.isLeft) {
+                current.parent!.left = current.left
+            } else {
+                current.parent!.right = current.left
+            }
+        }
+        // 删除只有一个右子节点
+        else if (current.left === null) {
+            if (current === this.root) {
+                this.root = current.right
+            } else if (current.isLeft) {
+                current.parent!.left = current.right
+            } else {
+                current.parent!.right = current.right
+            }
+        }
+
+        // 4.删除当前节点有两个子节点的情况
+        else {
+            const successor = this.getSuccessor(current)
+            if (current == this.root) {
+                this.root = successor
+            } else if (current.isLeft) {
+                current.parent!.left = successor
+            } else {
+                current.parent!.right = successor
             }
         }
 
@@ -240,13 +315,35 @@ console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(20):", bs
 console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:193 ~ bst.search(21):", bst.search(21))
 
 // 删除
-bst.remove(3)
-bst.remove(8)
-bst.remove(12)
+// 1.删除叶子节点
+// bst.remove(3)
+// bst.remove(8)
+// bst.remove(12)
+// bst.print()
+// bst.remove(6)
+// bst.remove(10)
+// bst.remove(25)
+// bst.print()
+
+// // 2.只有一个节点
+// bst.remove(20)
+// bst.print()
+// bst.remove(13)
+// bst.print()
+
+// 3.当前节点有两个节点
 bst.print()
-bst.remove(6)
-bst.remove(10)
-bst.remove(25)
+bst.remove(11)
+const info1 = '删除11'
+console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:337 ~ info1:", info1)
+bst.print()
+const info2 = '删除15'
+bst.remove(15)
+console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:340 ~ info2:", info2)
+bst.print()
+const info3 = '删除9'
+console.log("🚀 ~ file: 01_二叉搜索树BSTree.ts:344 ~ info3:", info3)
+bst.remove(9)
 bst.print()
 
 
