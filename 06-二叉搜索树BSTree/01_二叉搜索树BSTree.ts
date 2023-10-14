@@ -1,7 +1,7 @@
 import Node from "../types/INode";
 import { btPrint } from "hy-algokit";
 
-class TreeNode<T> extends Node<T> {
+export class TreeNode<T> extends Node<T> {
     left: TreeNode<T> | null = null;
     right: TreeNode<T> | null = null;
 
@@ -20,7 +20,7 @@ class TreeNode<T> extends Node<T> {
 }
 
 
-class BSTree<T>{
+export class BSTree<T>{
     root: TreeNode<T> | null = null;
 
     // 打印树
@@ -29,7 +29,7 @@ class BSTree<T>{
     }
 
     // 插入数据
-    insert(value: T): void {
+    insert(value: T) {
         // 1.根据传入的 value 创建 Node(TreeNode) 节点
         const newNode = new TreeNode(value);
 
@@ -39,6 +39,11 @@ class BSTree<T>{
         } else { // 如果树中有其它节点
             this.insertNode(this.root, newNode);
         }
+    }
+
+    // 插入多个
+    inserts(...values: T[]) {
+        values.forEach(value => this.insert(value))
     }
 
     private insertNode(node: TreeNode<T>, newNode: TreeNode<T>) {
