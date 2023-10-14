@@ -118,6 +118,9 @@ class LinkedList<T> implements ILinkedList<T> {
       // previous为上一个节点 previous.next为position的节点 previous.next.next为position下一个节点
       const previous = this.getNode(positoin - 1)
 
+      // 需要给 current 重新赋值
+      current = previous!.next
+
       // 找到需要删除的节点并修改指向删除
       previous!.next = previous?.next?.next ?? null
     }
@@ -209,8 +212,8 @@ console.log("🚀 ~ file: 01-实现链表.ts:105 ~ linkedList.length:", linkedLi
 
 // 测试删除节点
 console.log("🚀 ~ file: 01-实现链表.ts:162 ~ 删除节点:", '测试删除节点')
-linkedList.removeAt(0)
-linkedList.removeAt(0)
+console.log("🚀 ~ file: 02-重构链表.ts:216 ~ linkedList.removeAt(0):", linkedList.removeAt(0))
+console.log("🚀 ~ file: 02-重构链表.ts:218 ~ linkedList.removeAt(0):", linkedList.removeAt(0))
 console.log("🚀 ~ file: 01-实现链表.ts:131 ~ linkedList.traverse():", linkedList.traverse())
 console.log("🚀 ~ file: 01-实现链表.ts:149 ~ linkedList.removeAt(3):", linkedList.removeAt(3))
 console.log("🚀 ~ file: 01-实现链表.ts:149 ~ linkedList.traverse():", linkedList.traverse())
