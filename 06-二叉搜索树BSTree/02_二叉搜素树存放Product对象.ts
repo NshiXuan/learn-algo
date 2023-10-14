@@ -1,6 +1,6 @@
-import { BSTree } from "./01_二叉搜索树BSTree";
+import { BSTree } from "./03_二叉搜素树自定义打印树结构";
 
-class Product {
+export class Product {
     // name: string;
     // price: number;
     // constructor(name: string, price: number) {
