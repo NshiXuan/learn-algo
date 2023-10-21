@@ -2,8 +2,8 @@ package queue
 
 type Queuer interface {
 	enqueue(val int)
-	dequeue() int
-	peek() int
+	dequeue() any
+	peek() any
 	size() int
 	isEmpty() bool
 }
