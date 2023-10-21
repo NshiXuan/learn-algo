@@ -40,3 +40,21 @@ func TestArrayStack(t *testing.T) {
 	fmt.Printf("arrayStack.pop(): %v\n", arrayStack.pop())
 	fmt.Printf("arrayStack.isEmpty(): %v\n", arrayStack.isEmpty())
 }
+
+func TestLinkedListStack(t *testing.T) {
+	linkedListStack := NewLinkedListStack()
+	linkedListStack.push(1)
+	linkedListStack.push(2)
+	linkedListStack.push(3)
+
+	fmt.Printf("linkedListStack.toList(): %+v\n", linkedListStack.toList())
+	fmt.Printf("linkedListStack.peek(): %v\n", linkedListStack.peek())
+	fmt.Printf("linkedListStack.size(): %v\n", linkedListStack.size())
+
+	linkedListStack.pop()
+	linkedListStack.pop()
+	fmt.Printf("linkedListStack.peek(): %v\n", linkedListStack.peek())
+	linkedListStack.pop()
+	fmt.Printf("linkedListStack.peek(): %v\n", linkedListStack.peek())
+	fmt.Printf("linkedListStack.size(): %v\n", linkedListStack.size())
+}
