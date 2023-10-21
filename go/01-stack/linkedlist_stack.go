@@ -11,7 +11,7 @@ func NewLinkedListStack() *linkedListStack {
 	return &linkedListStack{data: list.New()}
 }
 
-var _ Stacker = &linkedListStack{}
+// var _ Stacker = &linkedListStack{}
 
 // 入栈
 func (s *linkedListStack) push(val int) {

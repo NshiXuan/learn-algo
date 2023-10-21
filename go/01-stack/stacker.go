@@ -1,7 +1,7 @@
 package stack
 
-type Stacker interface {
-	push(element int)
+type Stacker[T any] interface {
+	push(element T)
 	pop() any
 	peek() any
 	isEmpty() bool

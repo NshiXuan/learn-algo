@@ -26,19 +26,35 @@ func TestStack(t *testing.T) {
 }
 
 func TestArrayStack(t *testing.T) {
-	arrayStack := NewArrayStack()
-	arrayStack.push(1)
-	arrayStack.push(2)
-	arrayStack.push(3)
+	intArrayStack := NewArrayStack[int]()
+	intArrayStack.push(1)
+	intArrayStack.push(2)
+	intArrayStack.push(3)
 
-	fmt.Printf("arrayStack.toSlice(): %v\n", arrayStack.toSlice())
-	fmt.Printf("arrayStack.peek(): %v\n", arrayStack.peek())
-	fmt.Printf("arrayStack.isEmpty(): %v\n", arrayStack.isEmpty())
+	fmt.Printf("arrayStack.toSlice(): %v\n", intArrayStack.toSlice())
+	fmt.Printf("arrayStack.peek(): %v\n", intArrayStack.peek())
+	fmt.Printf("arrayStack.isEmpty(): %v\n", intArrayStack.isEmpty())
 
-	fmt.Printf("arrayStack.pop(): %v\n", arrayStack.pop())
-	fmt.Printf("arrayStack.pop(): %v\n", arrayStack.pop())
-	fmt.Printf("arrayStack.pop(): %v\n", arrayStack.pop())
-	fmt.Printf("arrayStack.isEmpty(): %v\n", arrayStack.isEmpty())
+	fmt.Printf("arrayStack.pop(): %v\n", intArrayStack.pop())
+	fmt.Printf("arrayStack.pop(): %v\n", intArrayStack.pop())
+	fmt.Printf("arrayStack.pop(): %v\n", intArrayStack.pop())
+	fmt.Printf("arrayStack.isEmpty(): %v\n", intArrayStack.isEmpty())
+
+	stringArrayStack := NewArrayStack[string]()
+	stringArrayStack.push("a")
+	stringArrayStack.push("b")
+	stringArrayStack.push("c")
+
+	fmt.Printf("stringArrayStack.toSlice(): %v\n", stringArrayStack.toSlice())
+	fmt.Printf("stringArrayStack.peek(): %v\n", stringArrayStack.peek())
+	fmt.Printf("stringArrayStack.isEmpty(): %v\n", stringArrayStack.isEmpty())
+
+	fmt.Printf("stringArrayStack.pop(): %v\n", stringArrayStack.pop())
+	fmt.Printf("stringArrayStack.pop(): %v\n", stringArrayStack.pop())
+	fmt.Printf("stringArrayStack.pop(): %v\n", stringArrayStack.pop())
+	fmt.Printf("stringArrayStack.toSlice(): %v\n", stringArrayStack.toSlice())
+	fmt.Printf("stringArrayStack.peek(): %v\n", stringArrayStack.peek())
+	fmt.Printf("stringArrayStack.isEmpty(): %v\n", stringArrayStack.isEmpty())
 }
 
 func TestLinkedListStack(t *testing.T) {
