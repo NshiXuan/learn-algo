@@ -174,22 +174,31 @@ func (l *LinkedList[T]) indexOf(val T) int {
 }
 
 // 根据 Val 删除 Node 节点
+// func (l *LinkedList[T]) remove(val T) any {
+// 	// 1.获取节点
+// 	current := l.head
+// 	var previous *ListNode[T]
+// 	for current.Val != val {
+// 		previous = current
+// 		current = current.Next
+// 	}
+
+// 	// 2.删除节点
+// 	previous.Next = current.Next
+
+// 	// 3.长度-1
+// 	l.size--
+
+// 	return current.Val
+// }
+
+// 优化 remove
 func (l *LinkedList[T]) remove(val T) any {
 	// 1.获取节点
-	current := l.head
-	var previous *ListNode[T]
-	for current.Val != val {
-		previous = current
-		current = current.Next
-	}
+	index := l.indexOf(val)
 
 	// 2.删除节点
-	previous.Next = current.Next
-
-	// 3.长度-1
-	l.size--
-
-	return current.Val
+	return l.removeAt(index)
 }
 
 func (l *LinkedList[T]) isEmpty() bool {
