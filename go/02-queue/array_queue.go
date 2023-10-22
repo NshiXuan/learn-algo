@@ -1,25 +1,25 @@
 package queue
 
 // 队列 先进先出
-type arrayQueue struct {
-	data []int
+type arrayQueue[T any] struct {
+	data []T
 }
 
-func NewArrayQueue() *arrayQueue {
-	return &arrayQueue{
-		data: make([]int, 0, 16),
+func NewArrayQueue[T any]() *arrayQueue[T] {
+	return &arrayQueue[T]{
+		data: make([]T, 0, 16),
 	}
 }
 
-var _ Queuer = &arrayQueue{}
+var _ Queuer[any] = &arrayQueue[any]{}
 
 // enqueue 入列
-func (q *arrayQueue) enqueue(val int) {
+func (q *arrayQueue[T]) enqueue(val T) {
 	q.data = append(q.data, val)
 }
 
 // dequeue 出列
-func (q *arrayQueue) dequeue() any {
+func (q *arrayQueue[T]) dequeue() any {
 	if q.isEmpty() {
 		return nil
 	}
@@ -29,15 +29,15 @@ func (q *arrayQueue) dequeue() any {
 	return res
 }
 
-func (q *arrayQueue) isEmpty() bool {
+func (q *arrayQueue[T]) isEmpty() bool {
 	return len(q.data) == 0
 }
 
-func (q *arrayQueue) size() int {
+func (q *arrayQueue[T]) size() int {
 	return len(q.data)
 }
 
-func (q *arrayQueue) peek() any {
+func (q *arrayQueue[T]) peek() any {
 	if q.isEmpty() {
 		return nil
 	}
@@ -45,6 +45,6 @@ func (q *arrayQueue) peek() any {
 	return q.data[len(q.data)-1]
 }
 
-func (q *arrayQueue) toSlice() []int {
+func (q *arrayQueue[T]) toSlice() []T {
 	return q.data
 }
