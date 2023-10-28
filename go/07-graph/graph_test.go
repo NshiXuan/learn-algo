@@ -21,10 +21,16 @@ func TestGraph(t *testing.T) {
 	graph.addEdge("C", "D")
 	graph.addEdge("C", "G")
 	graph.addEdge("D", "G")
-	graph.addEdge("D", "G")
+	graph.addEdge("D", "H")
 	graph.addEdge("B", "E")
 	graph.addEdge("B", "F")
 	graph.addEdge("E", "I")
 
 	graph.traverse()
+
+	// 广度优先
+	graph.bfs()
+	graph.bfs2()
+
+	graph.dfs()
 }
