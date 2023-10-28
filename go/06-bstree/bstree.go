@@ -18,7 +18,8 @@ func NewTreeNode[T Comparable](value T) *TreeNode[T] {
 }
 
 type BSTree[T Comparable] struct {
-	root *TreeNode[T]
+	root   *TreeNode[T]
+	parent *TreeNode[T]
 }
 
 func NewBSTree[T Comparable]() *BSTree[T] {
@@ -220,4 +221,32 @@ func (t *BSTree[T]) getMinValue() any {
 	}
 
 	return current.value
+}
+
+func (t *BSTree[T]) search(val T) bool {
+	return t.searchNode(val) != nil
+}
+
+// search 根据值搜索节点 二分查找
+func (t *BSTree[T]) searchNode(val T) *TreeNode[T] {
+	current := t.root
+	for current != nil {
+		if current.value == val {
+			return current
+		}
+
+		parent := current
+		if current.value < val {
+			// 右子树搜索
+			current = current.right
+		} else {
+			current = current.left
+		}
+
+		if current != nil {
+			t.parent = parent
+		}
+	}
+
+	return nil
 }

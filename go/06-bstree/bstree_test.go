@@ -37,4 +37,8 @@ func TestBsTree(t *testing.T) {
 
 	fmt.Printf("bst.getMaxValue(): %v\n", bst.getMaxValue())
 	fmt.Printf("bst.getMinValue(): %v\n", bst.getMinValue())
+
+	fmt.Printf("bst.searchNode(11): %v\n", bst.searchNode(11))
+	fmt.Printf("bst.search(6): %v\n", bst.search(6))
+	fmt.Printf("bst.search(100): %v\n", bst.search(100))
 }
