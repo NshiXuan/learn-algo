@@ -38,6 +38,13 @@ func (t *BSTree[T]) insert(val T) {
 	}
 }
 
+// inserts 插入多个
+func (t *BSTree[T]) inserts(vals ...T) {
+	for _, v := range vals {
+		t.insert(v)
+	}
+}
+
 func (t *BSTree[T]) insertNode(node, newNode *TreeNode[T]) {
 	if newNode.value > node.value {
 		// 右边插入
