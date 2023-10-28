@@ -25,10 +25,13 @@ func TestBsTree(t *testing.T) {
 
 	// 先序遍历
 	bst.preOrderTraverse()
+	bst.preOrderTraverseByIteration()
 	// 中序遍历
 	bst.inOrderTraverse()
+	bst.inOrderTraverseByIteration()
 	// 后序遍历
 	bst.postOrderTraverse()
+	bst.postOrderTraverseByIteration()
 	// 层序遍历
 	bst.levelOrderTraverse()
 

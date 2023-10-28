@@ -68,6 +68,27 @@ func (t *BSTree[T]) preOrderTraverseNode(node *TreeNode[T]) {
 	}
 }
 
+// 迭代实现前序遍历
+func (t *BSTree[T]) preOrderTraverseByIteration() {
+	if t.root == nil {
+		return
+	}
+
+	current := t.root
+	stack := make([]*TreeNode[T], 0)
+	for len(stack) > 0 || current != nil {
+		for current != nil {
+			fmt.Printf("preOrderTraverseByIteration current.value: %v\n", current.value)
+			stack = append(stack, current)
+			current = current.left
+		}
+
+		current = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		current = current.right
+	}
+}
+
 // 中序遍历 先遍历完左子树 再遍历根节点 最后遍历右子树
 func (t *BSTree[T]) inOrderTraverse() {
 	t.inOrderTraverseNode(t.root)
@@ -81,6 +102,27 @@ func (t *BSTree[T]) inOrderTraverseNode(node *TreeNode[T]) {
 	}
 }
 
+// 迭代实现中序遍历
+func (t *BSTree[T]) inOrderTraverseByIteration() {
+	if t.root == nil {
+		return
+	}
+
+	current := t.root
+	stack := make([]*TreeNode[T], 0)
+	for len(stack) > 0 || current != nil {
+		for current != nil {
+			stack = append(stack, current)
+			current = current.left
+		}
+
+		current = stack[len(stack)-1]
+		fmt.Printf("inOrderTraverseByIteration current.value: %v\n", current.value)
+		stack = stack[:len(stack)-1]
+		current = current.right
+	}
+}
+
 // 后序遍历 先遍历左子树  再遍历完右子树 最后遍历根节点
 func (t *BSTree[T]) postOrderTraverse() {
 	t.postOrderTraverseNode(t.root)
@@ -91,6 +133,34 @@ func (t *BSTree[T]) postOrderTraverseNode(node *TreeNode[T]) {
 		t.postOrderTraverseNode(node.left)
 		t.postOrderTraverseNode(node.right)
 		fmt.Printf("postOrderTraverseNode node.value: %v\n", node.value)
+	}
+}
+
+// 迭代实现后序遍历
+func (t *BSTree[T]) postOrderTraverseByIteration() {
+	if t.root == nil {
+		return
+	}
+
+	current := t.root
+	stack := make([]*TreeNode[T], 0)
+	var pre *TreeNode[T]
+	for len(stack) > 0 || current != nil {
+		for current != nil {
+			stack = append(stack, current)
+			current = current.left
+		}
+
+		current = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if current.right == nil || pre == current.right {
+			fmt.Printf("postOrderTraverseByIteration current.value: %v\n", current.value)
+			pre = current
+			current = nil
+		} else {
+			stack = append(stack, current)
+			current = current.right
+		}
 	}
 }
 
