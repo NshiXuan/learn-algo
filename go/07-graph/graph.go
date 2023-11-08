@@ -117,7 +117,6 @@ func (g *Graph[T]) dfs() {
 		return
 	}
 
-	// 2.
 	var stack []T
 	var visited []T
 	stack = append(stack, g.verteces[0])
@@ -136,6 +135,7 @@ func (g *Graph[T]) dfs() {
 			if !g.contains(visited, nei) {
 				visited = append(visited, nei)
 				stack = append(stack, nei)
+				fmt.Printf("stack: %v\n", stack)
 			}
 		}
 	}
